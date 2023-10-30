@@ -24,12 +24,12 @@ class ofApp : public ofBaseApp{
     
     ofxFmod3DSoundPlayer player;
     
-    glm::vec3 lposition, lvelocity, lforward, lup;
-    glm::vec3 sposition;
-    glm::vec3 svelocity;
+    glm::vec3 lposition, lpositionScreen, lvelocity, lforward, lup;
+    glm::vec3 sposition, spositionScreen;
+    glm::vec3 svelocity, svelocityScreen;
     
     bool keyIsDown = false;
     bool mouseIsDown = false;
-    float scale = 1/20.f;
+    float scale = 1/50.f;
 		
 };

@@ -1,6 +1,9 @@
 #include "ofxFmod3DSoundPlayer.hpp"
 #include "ofFmodSoundPlayer.cpp"
 
+static FMOD_SYSTEM* sys3D = nullptr;
+
+
 bool ofxFmod3DInitialized_ = false;
 
 void ofxFmod3DUpdateListener(glm::vec3 position, glm::vec3 velocity, glm::vec3 forward, glm::vec3 up)
@@ -30,7 +33,12 @@ void ofxFmod3DSoundPlayer::initializeFmod(){
     
     if(!ofxFmod3DInitialized_){
         ofFmodSoundPlayer::initializeFmod();
-        FMOD_System_Set3DSettings(sys, 10.0f, 10.0f, 10.0f);
+        FMOD_System_SetSoftwareFormat(sys, 44100, FMOD_SPEAKERMODE_STEREO, FMOD_CHANNELORDER_DEFAULT);
+         
+
+
+        
+        FMOD_System_Set3DSettings(sys, 1.0f, 1.0f, 1.0f);
         ofxFmod3DInitialized_ = true;
     }
     
@@ -44,11 +52,11 @@ void ofxFmod3DSoundPlayer::closeFmod(){
 bool ofxFmod3DSoundPlayer::load(string _fileName, bool stream)
 {
     auto fileName = ofToDataPath(_fileName);
-    bMultiPlay = false;
+    setMultiPlay(false);
     initializeFmod();
     unload();
     
-    result = FMOD_System_CreateSound(sys, fileName.c_str(), FMOD_3D, NULL, &sound);
+   auto result = FMOD_System_CreateSound(sys, fileName.c_str(), FMOD_3D, NULL, &sound);
     result = FMOD_Sound_Set3DMinMaxDistance(sound, 1.f, 5000.0f);
     
     if (result != FMOD_OK){

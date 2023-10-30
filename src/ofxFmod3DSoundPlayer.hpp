@@ -1,6 +1,8 @@
 #pragma mark once
 
 #include "ofMain.h"
+#include "ofFmodSoundPlayer.h"
+
 
 void ofxFmod3DUpdateListener(glm::vec3 position, glm::vec3 velocity = glm::vec3 (0, 0, 0), glm::vec3 forward = glm::vec3 (0, 0, 1), glm::vec3 up = glm::vec3 (0, 1, 0));
 
@@ -22,5 +24,4 @@ public:
     
 private:
     FMOD_VECTOR pos3d, vel;
-        
 };
